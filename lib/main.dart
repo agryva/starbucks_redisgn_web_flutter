@@ -2,6 +2,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:responsive_framework/responsive_framework.dart';
+import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:scroll_snap_list/scroll_snap_list.dart';
 import 'package:starbucks_landing_web/utils/helpers.dart';
 import 'package:starbucks_landing_web/widgets/starbucks_button.dart';
@@ -22,6 +24,16 @@ class MyApp extends StatelessWidget {
         primarySwatch: Helpers.createMaterialColor(Color(0xff2B6D4E)),
       ),
       home: MyHomePage(title: 'Flutter Demo Home Page'),
+      builder: (context, widget) => ResponsiveWrapper.builder(
+        BouncingScrollWrapper.builder(context, widget),
+        minWidth: 480,
+        defaultScale: true,
+        breakpoints: [
+          ResponsiveBreakpoint.resize(480, name: MOBILE),
+          ResponsiveBreakpoint.autoScale(800, name: TABLET),
+          ResponsiveBreakpoint.resize(1000, name: DESKTOP),
+        ],
+      ),
     );
   }
 }
